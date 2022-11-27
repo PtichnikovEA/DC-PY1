@@ -11,10 +11,10 @@ def csv_to_list_dict(filename, delimiter=',', new_line='\n') -> list[dict]:
         if not row:
             return []
         else:
-            headers = row.split(delimiter)  # Принимаем первую прочитанную строку за строку заголовков
+            headers = row.replace('\n','').split(delimiter)  # Принимаем первую прочитанную строку за строку заголовков
         row = f.readline()
         while row:  # Читаем строки данных и записываем их в отдельный список
-            rows.append(row.split(delimiter))
+            rows.append(row.replace('\n','').split(delimiter))
             row = f.readline()
     return [{headers[i]: item[i] for i in range(0, len(item))} for item in rows]  # Генерируем список объектов
     # TODO реализовать конвертер из csv в json
